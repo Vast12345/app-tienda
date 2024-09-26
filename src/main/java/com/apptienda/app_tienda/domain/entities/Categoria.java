@@ -1,0 +1,24 @@
+package com.apptienda.app_tienda.domain.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+//@Entity
+//@Table(name = "categorias")
+@Data
+public class Categoria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length=45, nullable=false)
+    private String descripcion;
+
+    @Column(nullable=false, columnDefinition="tinyint(1)")
+    private boolean estado;
+}

@@ -22,27 +22,43 @@ public class ClienteImpl implements IClienteService{
         return (List<Cliente>) clienteRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Optional<Cliente> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return clienteRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public Cliente save(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return clienteRepository.save(cliente);
     }
 
+    @Transactional
     @Override
     public Optional<Cliente> update(Long id, Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Optional<Cliente> clienteOld = clienteRepository.findById(id);
+        if(clienteOld.isPresent()) {
+            Cliente clienteDb = clienteOld.orElseThrow();
+
+            clienteDb.setNombre(cliente.getNombre());
+            clienteDb.setApellido(cliente.getApellido());
+            clienteDb.setCelular(cliente.getCelular());
+            clienteDb.setDireccion(cliente.getDireccion());
+            clienteDb.setCorreoelectronico(cliente.getCorreoelectronico());
+
+            return Optional.of(clienteRepository.save(clienteDb));
+        }
+        return Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<Cliente> delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        cliente.ifPresent(clienteDb -> {
+            clienteRepository.delete(clienteDb);
+        });
+        return cliente;
     }
 }
