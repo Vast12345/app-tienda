@@ -19,7 +19,7 @@ import com.apptienda.app_tienda.application.services.ICategoriaService;
 import com.apptienda.app_tienda.domain.entities.Categoria;
 
 @RestController
-@RequestMapping("/crud/categoria")
+@RequestMapping("/api/categoria")
 public class CategoriaController {
 
     @Autowired
