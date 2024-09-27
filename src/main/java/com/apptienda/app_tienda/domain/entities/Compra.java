@@ -22,12 +22,12 @@
 
         @Column(nullable=false, columnDefinition="datetime")
         private LocalDateTime fecha;
-        @Column(length = 1, name="medio_pago")
+        @Column(columnDefinition="char(1)", name = "medio_pago")
         private String mediopago;
         @Column(length=300, nullable = false)
         private String comentario;
-        @Column(length = 1)
-        private String estado;
+        @Column(nullable = false, columnDefinition = "char(1)")
+        private boolean estado;
 
         @ManyToOne
         private Cliente cliente;

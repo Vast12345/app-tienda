@@ -25,7 +25,7 @@ public class CategoriaController {
     @Autowired
     private ICategoriaService categoriaService;
 
-    @GetMapping
+    @GetMapping("/list")
     public List<Categoria> list() {
         return categoriaService.findAll();
     }
@@ -39,7 +39,7 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Categoria categoria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
     }

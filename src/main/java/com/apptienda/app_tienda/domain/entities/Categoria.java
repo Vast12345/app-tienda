@@ -3,6 +3,8 @@ package com.apptienda.app_tienda.domain.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "categorias")
 @Data
@@ -17,4 +19,7 @@ public class Categoria {
 
     @Column(nullable=false, columnDefinition="tinyint(1)")
     private boolean estado;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Producto> productos;
 }
