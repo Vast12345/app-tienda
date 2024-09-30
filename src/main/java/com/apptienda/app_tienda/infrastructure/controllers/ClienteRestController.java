@@ -1,11 +1,15 @@
 package com.apptienda.app_tienda.infrastructure.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.apptienda.app_tienda.application.services.IClienteService;
@@ -34,12 +38,18 @@ public class ClienteRestController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody Cliente cliente) {
+    public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
+        if (result.hasFieldErrors()) {
+            return validation(result);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, @PathVariable Long id, BindingResult result) {
+        if (result.hasFieldErrors()) {
+            return validation(result);
+        }
         Optional<Cliente> clienteOptional = clienteService.update(id, cliente);
         if(clienteOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteOptional.orElseThrow());
@@ -56,4 +66,12 @@ public class ClienteRestController {
         return ResponseEntity.notFound().build();
     }   
 
+    private ResponseEntity<?> validation(BindingResult result) {
+        Map<String, String> errors = new HashMap<>();
+
+        result.getFieldErrors().forEach((err) -> {
+            errors.put(err.getField(), "The Field" + err.getField() + " " + err.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(errors);
+    }
 }

@@ -1,13 +1,12 @@
 package com.apptienda.app_tienda.application.services;
 
-import com.apptienda.app_tienda.domain.entities.Compra;
-
 import java.util.List;
 import java.util.Optional;
 
+import com.apptienda.app_tienda.domain.entities.Compra;
+
 public interface ICompraService {
     List<Compra> findAll();
-
     Optional<Compra> findById(Long id);
 
     Compra save(Compra compra);
