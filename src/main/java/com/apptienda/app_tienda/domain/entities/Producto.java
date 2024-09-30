@@ -1,11 +1,18 @@
 package com.apptienda.app_tienda.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "productos")
 @Data
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Producto {
 
     @Id
@@ -27,7 +34,8 @@ public class Producto {
     @Column(nullable = false, columnDefinition = "tinyint")
     private boolean estado;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
 }

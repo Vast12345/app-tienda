@@ -23,7 +23,7 @@ public class ProductoController {
         return productoService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view/{id}")
     public ResponseEntity<?> view(@PathVariable Long id) {
         Optional<Producto> productoOptional = productoService.findById(id);
         if(productoOptional.isPresent()) {

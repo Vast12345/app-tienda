@@ -1,12 +1,11 @@
 package com.apptienda.app_tienda.domain.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Embeddable
 @Getter

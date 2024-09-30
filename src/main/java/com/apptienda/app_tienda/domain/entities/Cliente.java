@@ -2,6 +2,7 @@ package com.apptienda.app_tienda.domain.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,5 +33,6 @@ public class Cliente {
     private String correoelectronico;
 
     @OneToMany(mappedBy="cliente")
+    @JsonIgnore
     private List<Compra> compras;
 }
