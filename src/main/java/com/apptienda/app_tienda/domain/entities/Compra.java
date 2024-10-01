@@ -17,9 +17,9 @@
     @Entity
     @Table(name="compras")
     @Data
-    //@JsonIdentityInfo(
-    //        generator = ObjectIdGenerators.PropertyGenerator.class,
-    //        property = "id")
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     public class Compra {
 
         @Id
@@ -36,6 +36,5 @@
         private boolean estado;
 
         @ManyToOne
-        @JsonBackReference
         private Cliente cliente;
     }

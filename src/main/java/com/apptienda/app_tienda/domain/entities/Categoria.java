@@ -26,6 +26,6 @@ public class Categoria {
     @Column(nullable=false, columnDefinition="tinyint(1)")
     private boolean estado;
 
-    @OneToMany(mappedBy = "categoria", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "categoria", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Producto> productos;
 }
