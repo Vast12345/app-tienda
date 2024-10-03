@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categorias")
@@ -27,5 +28,5 @@ public class Categoria {
     private boolean estado;
 
     @OneToMany(mappedBy = "categoria", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private List<Producto> productos;
+    private Set<Producto> productos;
 }
