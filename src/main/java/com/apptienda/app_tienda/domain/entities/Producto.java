@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "productos")
 @Data
@@ -34,8 +36,10 @@ public class Producto {
     @Column(nullable = false, columnDefinition = "tinyint")
     private boolean estado;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "categoria_id")
+    @ManyToOne
     private Categoria categoria;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto")
+    private Set<CompraProducto> compraProducto;
 }

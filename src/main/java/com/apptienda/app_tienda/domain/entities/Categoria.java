@@ -12,9 +12,9 @@ import java.util.Set;
 @Entity
 @Table(name = "categorias")
 @Data
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id")
 public class Categoria {
 
     @Id
@@ -27,6 +27,6 @@ public class Categoria {
     @Column(nullable=false, columnDefinition="tinyint(1)")
     private boolean estado;
 
-    @OneToMany(mappedBy = "categoria", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private Set<Producto> productos;
 }

@@ -1,10 +1,11 @@
 package com.apptienda.app_tienda.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "compras_productos")
-
+@Data
 public class CompraProducto {
 
     @EmbeddedId
